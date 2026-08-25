@@ -1,0 +1,24 @@
+# Build artifacts
+/build/
+/build-*/
+*.o
+*.obj
+*.a
+*.dylib
+*.so
+/net
+/src/net
+/prototypes/x0[0-9]
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+
+# Editor / OS
+*.swp
+*~
+.DS_Store
+.idea/
+.cache/
