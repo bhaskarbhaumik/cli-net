@@ -1,0 +1,84 @@
+.\" Manpage for net.
+.TH NET 1 "2026-08-25" "net 1.0.0" "User Commands"
+.SH NAME
+net \- list macOS network interfaces and their IPv4 addresses
+.SH SYNOPSIS
+.B net
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B net
+enumerates the network interfaces on a macOS system and prints, for each one,
+its BSD interface name, the localized hardware port name, its IPv4 address,
+its MAC address and its link status. In the long view it additionally reports
+the maximum negotiated bandwidth and the adapter serial number.
+.PP
+Interface names and hardware port names are resolved through the
+.B SystemConfiguration
+framework, so they match the labels shown in System Settings. Link speed is
+decoded from the interface media word, and serial numbers are read from the
+IOKit registry.
+.PP
+By default only active interfaces are listed, and only the Hardware Port and
+IPv4 Address columns are shown. Output is colorized only when standard output
+is a terminal, so redirecting or piping the output yields clean plain text.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Show a help message and exit.
+.TP
+.BR \-v ", " \-\-version
+Print the version and exit.
+.TP
+.BR \-a ", " \-\-all
+Show all interfaces, including inactive ones. Inactive rows are rendered in
+dimmed colors.
+.TP
+.BR \-l ", " \-\-long
+Long view: show every column, adding maximum bandwidth and serial number to
+the default set.
+.TP
+.BR \-t ", " \-\-table
+Render a bordered table using
+.BR ncurses (3)
+instead of plain text. The table is shown in a full-screen window; press any
+key to exit.
+.SH EXIT STATUS
+.TP
+.B 0
+Successful completion.
+.TP
+.B 1
+An unknown option was given, or the interface list could not be read.
+.SH EXAMPLES
+List the active interfaces:
+.PP
+.RS
+.nf
+net
+.fi
+.RE
+.PP
+Show every interface with all columns:
+.PP
+.RS
+.nf
+net \-al
+.fi
+.RE
+.PP
+Render the full table in ncurses:
+.PP
+.RS
+.nf
+net \-\-table \-\-long
+.fi
+.RE
+.SH SEE ALSO
+.BR ifconfig (8),
+.BR networksetup (8),
+.BR netstat (1),
+.BR scutil (8)
+.SH AUTHOR
+Bhaskar Bhaumik
+.SH BUGS
+Report bugs at https://github.com/bhaskarbhaumik/cli-net/issues

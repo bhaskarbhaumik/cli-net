@@ -22,3 +22,28 @@ compile_commands.json
 .DS_Store
 .idea/
 .cache/
+
+# Autotools generated files
+# NOTE: the root ./Makefile is the hand-written GNU make build and IS tracked.
+#       Autotools uses out-of-tree builds (mkdir build-auto && cd build-auto &&
+#       ../configure), so its generated Makefile lands there and never
+#       clobbers the root one.
+/autom4te.cache/
+/aclocal.m4
+/config.h
+/config.h.in
+/config.h.in~
+/config.log
+/config.status
+/configure
+/configure~
+/libtool
+/stamp-h1
+Makefile.in
+.deps/
+.dirstamp
+/m4/*
+!/m4/.gitkeep
+/build-aux/
+/build-auto/
+/net-[0-9]*.tar.*

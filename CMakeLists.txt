@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
-project(net LANGUAGES C)
+
+# ---- version from the VERSION file ----------------------------------------
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION" _NET_VERSION_RAW LIMIT_COUNT 1)
+string(STRIP "${_NET_VERSION_RAW}" NET_VERSION)
+
+project(net VERSION ${NET_VERSION} LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -7,6 +12,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 add_executable(net src/net.c)
 
 target_compile_options(net PRIVATE -Wall -Wextra)
+target_compile_definitions(net PRIVATE NET_VERSION="${NET_VERSION}")
 
 # macOS frameworks
 find_library(LIB_SYSTEM_CONFIG   SystemConfiguration REQUIRED)
@@ -22,3 +28,4 @@ target_link_libraries(net PRIVATE
 )
 
 install(TARGETS net DESTINATION bin)
+install(FILES man/net.1 DESTINATION share/man/man1)

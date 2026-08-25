@@ -15,7 +15,11 @@
 #include <IOKit/IOKitLib.h>
 #include <curses.h>
 
-#define VERSION  "1.0.0"
+/* Version comes from the VERSION file via the build system
+   (-DNET_VERSION='"x.y.z"'); this is the standalone fallback. */
+#ifndef NET_VERSION
+#define NET_VERSION  "1.0.0"
+#endif
 #define MAX_ROWS 128
 
 // Column content widths (excluding borders / padding)
@@ -460,7 +464,7 @@ static void print_help(const char *prog) {
 }
 
 static void print_version(void) {
-    printf("net %s\n", VERSION);
+    printf("net %s\n", NET_VERSION);
 }
 
 // ─── Text mode ────────────────────────────────────────────────────────────────
